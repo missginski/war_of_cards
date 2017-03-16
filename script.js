@@ -1,26 +1,29 @@
-console.log('running...');
+let suits = ['❤', '⬥', '♣', '♠'];
+let names = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'Jack', 'Queen', 'King', 'Ace'];
+// let values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14']
 
-let card = function(name, value, suit) {
-  this.name = name;
-  this.value = value;
-  this.suit = suit;
-}
-
-let suits = ['Hearts', 'Diamonds', 'Clubs', 'Spades'];
-let values = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'Jack', 'Queen', 'King', 'Ace'];
 
 let deck = [];
 
-// function makeCards() {
-//   values.Map(foreach (suits , index) {
-//     deck.push()
-//   })
-// }
+suits.forEach( function(cardSuit, i) {
+  names.forEach( function(cardName, x) {
+    // values.forEach( function(cardValue, e) {
+      let card = {};
+      card.suit = suits[i];
+      card.name = names[x];
+      // card.value = values[e];
 
-values.forEach( function(value, i) {
-  suits.forEach( function(suit, i){
-    console.log( values[i], suits[i]);
-
+      deck.push(card);
+    })
   })
-})
+// })
+
+console.log(deck);
+
+
+
+
+
+
+
 
