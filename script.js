@@ -18,63 +18,43 @@ var makeCards = function(suits, names, values) {
   });
 }
 makeCards(suits, names, values);
-console.log(deck)
+
+
+// randomize with .sort()
+// http://stackoverflow.com/questions/3718282/javascript-shuffling-objects-inside-an-object-randomize
+let shuffle = function(a, b) {
+  return Math.random() - .5;
+}
+deck.sort(shuffle);
+
+
+
+let stack1 = [];
+let stack2 = [];
+
+let dealWar = function(deck) {
+  $.map(deck, function(card, i) {
+    if (i > deck.length/2) {
+      stack1.push(card);
+    } else {
+      stack2.push(card)
+    }
+    return stack1;
+    return stack2;
+});
+}
+
+dealWar(deck);
+
+console.log(stack1);
+console.log(stack2);
+
+
+let play = function(stack1, stack2)
 
 
 
 
-// Prototype method
-
-// Array.prototype.shuffle = function() {
-//   let input = this;
-
-//   for (let i = input.length-1; i>=0; i--) {
-//     let randomIndex = Math.floor(Math.random() * (i+1));
-//     let itemAtIndex = input[randomIndex];
-
-//     input[randomIndex] = input[i];
-//     input[i] = itemAtIndex;
-//   }
-//   return input
-// }
-
-// deck.shuffle();
-// console.log(deck)
-
-
-
-
-
-
-
-
-
-
-// randomize method
-
-// let randomize = function(a, b) {
-//   return Math.random() - .5;
-// }
-// deck.sort(randomize);
-
-
-
-
-
-// Fishr Yates Method
-
-// let shuffleDeck = function(array) {
-//   var count = array.length, randomIndex, temp;
-//   while(count) {
-//     randomIndex = Math.random() * count-- | 0;
-//     temp = array[count];
-//     array[count] = array[randomIndex];
-//     array[randomIndex] = temp;
-//   }
-// }
-
-// shuffleDeck(deck);
-// console.log(deck);
 
 
 
