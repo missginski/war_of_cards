@@ -19,6 +19,8 @@ var makeCards = function(suits, names, values) {
 }
 makeCards(suits, names, values);
 
+console.log(deck)
+
 
 // randomize with .sort()
 // http://stackoverflow.com/questions/3718282/javascript-shuffling-objects-inside-an-object-randomize
@@ -34,7 +36,7 @@ let stack2 = [];
 
 let dealWar = function(deck) {
   $.map(deck, function(card, i) {
-    if (i > deck.length/2) {
+    if (i >= deck.length/2) {
       stack1.push(card);
     } else {
       stack2.push(card)
@@ -44,13 +46,34 @@ let dealWar = function(deck) {
 });
 }
 
-dealWar(deck);
-
-console.log(stack1);
-console.log(stack2);
+// dealWar(deck)
 
 
-let play = function(stack1, stack2)
+let play = function(stack1, stack2) {
+  let card1 = stack1.shift();
+  let card2 = stack2.shift();
+
+  if (card1.value > card2.value) {
+    stack1.push(card1, card2);
+  }
+  else {
+    stack2.push(card1, card2);
+  }
+}
+// play(stack1, stack2);
+
+
+let table = $('section.table');
+
+let pOneStack = $('<div class="stack">');
+table.append(pOneStack);
+
+
+
+
+
+
+
 
 
 
