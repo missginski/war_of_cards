@@ -72,7 +72,7 @@ DOM Stuff
 
 let table = $('section.table');
 
-let deck = $('<div class="card stack back">')
+// let deck = $('<div class="card stack back">')
 
 let pOneStack = $('<div class="card stack back">');
 let pTwoStack = $('<div class="card stack back"');
