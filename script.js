@@ -63,13 +63,24 @@ let play = function(stack1, stack2) {
 // play(stack1, stack2);
 
 
+
+
+
+/******************************
+DOM Stuff
+******************************/
+
 let table = $('section.table');
 
-let pOneStack = $('<div class="stack">');
+let deck = $('<div class="card stack back">')
+
+let pOneStack = $('<div class="card stack back">');
+let pTwoStack = $('<div class="card stack back"');
+
+
 table.append(pOneStack);
 
-
-
+let
 
 
 

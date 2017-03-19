@@ -1,13 +1,26 @@
 body {
+  margin: 0;
+  padding: 0;
+}
+
+.game_table {
   background: #073;
+  border: 10% solid #333;
+/*  border-radius: 5%;
+*/}
+
+
+.card {
+  border: #fff;
+  height: 300px;
+  width: 225px;
+  border-radius: 5%;
+
 }
 
 .stack {
-  background: #000;
-  height: 20px;
-  width: 40px;
-}
 
-.card {
 
 }
+
+
