@@ -1,7 +1,5 @@
 body {
   background: #073;
-/*  border: 10px solid brown;
-  height: 100%;*/
   margin: 0;
   padding: 0;
 }
@@ -17,18 +15,16 @@ h1 {
 }
 
 h1 span {
-    font-size:  42px;
+  font-size: 42px;
 }
 
-.play_area {
+.game_table {
   text-align: center;
 }
 
-.start_deck {
-  margin: 80px auto;
+.start_button {
 
 }
-
 
 
 
@@ -37,21 +33,42 @@ h1 span {
 button {
   width: 10%;
   font-size: 32px;
-  background: #ccc;
+  background: #aaa;
+  margin-bottom: 30px;
 }
-
 
 .card {
   background: #fff;
   height: 300px;
   width: 225px;
   border-radius: 5%;
-
+  margin: 50px auto;
 }
 
 .stack {
 
-
 }
+
+
+.pOne {
+  display: inline-block;
+  margin-right: 420px;
+}
+
+.pTwo {
+  display: inline-block;
+  margin-left: 420px;
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
