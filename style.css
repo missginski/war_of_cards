@@ -5,9 +5,6 @@ body {
 }
 
 
-
-/****** START PAGE ******/
-
 h1 {
   color: #ff9;
   font-family: 'Abril Fatface', cursive;
@@ -22,14 +19,6 @@ h1 span {
   text-align: center;
   color: white;
 }
-
-.start_button {
-
-}
-
-
-
-
 
 button {
   width: 10%;
@@ -54,8 +43,6 @@ button {
   background-size: cover;
 }
 
-
-
 .pOne, .pTwo, .status {
   display: inline-block;
   vertical-align: middle;
@@ -70,20 +57,5 @@ button {
   width: 300px;
   font-size: 26px;
 }
-
-/*.info {
-  font-size: 26px;
-}
-*/
-
-
-
-
-
-
-
-
-
-
 
 
