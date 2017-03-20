@@ -62,10 +62,19 @@ button {
 }
 
 .status {
-  display: inline-block;
   width: 300px;
+  font-size: 26px;
 }
 
+.status, .info {
+  width: 300px;
+  font-size: 26px;
+}
+
+/*.info {
+  font-size: 26px;
+}
+*/
 
 
 
