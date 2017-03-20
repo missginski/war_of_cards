@@ -123,9 +123,6 @@ let  declareWar = function() {
   $('.pTwo .info').text(`Player 2 - ${stack2.length} cards left`);
 };
 
-/******************************
-DOM Stuff
-******************************/
 
 let table = $('div.game_table');
 let startDeck = $('<div class="card stack back start_deck">');
@@ -190,8 +187,4 @@ let addEventListeners = function() {
 
 }
 addEventListeners();
-
-
-
-
 
