@@ -20,6 +20,7 @@ h1 span {
 
 .game_table {
   text-align: center;
+  color: white;
 }
 
 .start_button {
@@ -40,24 +41,29 @@ button {
 .card {
   background: #fff;
   height: 300px;
+  line-height: 300px;
   width: 225px;
   border-radius: 5%;
   margin: 50px auto;
+  font-size: 56px;
+  color: black;
 }
 
-.stack {
-
+.card.back {
+  background: url(card_back.jpg);
+  background-size: cover;
 }
 
 
-.pOne {
+
+.pOne, .pTwo, .status {
   display: inline-block;
-  margin-right: 420px;
+  vertical-align: middle;
 }
 
-.pTwo {
+.status {
   display: inline-block;
-  margin-left: 420px;
+  width: 300px;
 }
 
 

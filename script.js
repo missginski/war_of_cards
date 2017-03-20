@@ -3,7 +3,7 @@ let names = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'Jack', 'Queen', 'Kin
 let values = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
 let deck = [];
 
-var makeCards = function(suits, names, values) {
+let makeCards = function(suits, names, values) {
   $.each(suits, function(i, cardSuit) {
     $.each(values, function(e, cardVal) {
       let card = {};
@@ -15,14 +15,16 @@ var makeCards = function(suits, names, values) {
   })
 };
 
-// randomize with .sort()
-// http://stackoverflow.com/questions/3718282/javascript-shuffling-objects-inside-an-object-randomize
+
+// This function uses sort. found it here
+//stackoverflow.com/questions/3718282/javascript-shuffling-objects-inside-an-object-randomize
 let shuffle = function(a, b) {
   return Math.random() - .5;
 };
 
-let stack1 = [];
-let stack2 = [];
+
+var stack1 = [];
+var stack2 = [];
 let dealWar = function(deck) {
   $.map(deck, function(card, i) {
     if (i >= deck.length/2) {
@@ -34,65 +36,98 @@ let dealWar = function(deck) {
   })
 };
 
-let play = function(stack1, stack2) {
+
+var warCards = [];
+let play = function() {
   let card1 = stack1.shift();
   let card2 = stack2.shift();
 
+  $('.card').removeClass('back');
+  $('.pOne .card').text(`${card1.suit} ${card1.name}`);
+  $('.pTwo .card').text(`${card2.suit} ${card2.name}`);
+
   if (card1.value > card2.value) {
     stack1.push(card1, card2);
+    $('.status').text(`Player 1 beats Player 2`);
   }
   else if (card1.value < card2.value) {
     stack2.push(card1, card2);
+    $('.status').text(`Player 2 beats Player 1`);
   }
   else {
-    declareWar();
+    warCards = [card1, card2];
+    alertWar();
   }
 
-  if (stack1.length === 0) {
-    let isWinner = stack2;
-    $('h1').text(`You lose... Sorry`);
-  }
-  else {
-    isWinner = stack1;
-    $('h1').text(`You win! Hooraaay!!`);
-  }
-
+  $('.pOne .info').text(`Player 1 - ${stack1.length} cards left`);
+  $('.pTwo .info').text(`Player 2 - ${stack2.length} cards left`);
 };
 
-// let  declareWar = function() {
-//   $('h1').text('Time to Battle!');
-//   let warStack1 = stack1.splice(0, 4);
-//   let warStack2 = stack2.splice(0, 4);
 
-//   if (warStack1[3] > warStack2[3]) {
-//     $.each(warStack1, function(i) {
-//       if (warStack1.length > 0) {
-//        stack1.push(warStack1[i]);
-//       }
-//       if (warStack2.length >0) {
-//         stack1.push(warStack2[i]);
-//       }
-//       console.log(stack1[3], stack2[3], warStack1, warStack2, stack1, stack2)
-//     });
-
-//   }
-// };
+let alertWar = function(cards) {
+  alert('WAR !!!!');
+  $('.pOne .card').text('');
+  $('.pTwo .card').text('');
+  $('.pOne .card').addClass('back');
+  $('.pTwo .card').addClass('back');
+  $('.draw_button').hide();
+  $('.war_button').show();
+}
 
 
+let  declareWar = function() {
+  let warStack1 = stack1.splice(0, 4);
+  let warStack2 = stack2.splice(0, 4);
 
+  $('.card').removeClass('back');
+  $('.pOne .card').text(`${warStack1[3].suit} ${warStack1[3].name}`);
+  $('.pTwo .card').text(`${warStack2[3].suit} ${warStack2[3].name}`);
+  $('.draw_button').show();
+  $('.war_button').hide();
 
+  if (warStack1[3].value > warStack2[3].value) {
+    $.each(warStack2, function(i, card) {
+       stack1.push(card);
+    });
+    $.each(warStack1, function(i, card) {
+       stack1.push(card);
+    });
+    $.each(warCards, function(i, card) {
+       stack1.push(card);
+    });
+    warCards = [];
+ }
+  else if (warStack1[3].value < warStack2[3].value)  {
+    $.each(warStack2, function(i, card) {
+       stack2.push(card);
+    });
+    $.each(warStack1, function(i, card) {
+       stack2.push(card);
+    });
+    $.each(warCards, function(i, card) {
+       stack2.push(card);
+    });
+    warCards = [];
+  }
+  else {
+    $.each(warStack1, function(i, card) {
+       warCards.push(card);
+    });
+    $.each(warStack2, function(i, card) {
+       warCards.push(card);
+    });
+    alertWar();
+  }
 
-
-
+  $('.pOne .info').text(`Player 1 - ${stack1.length} cards left`);
+  $('.pTwo .info').text(`Player 2 - ${stack2.length} cards left`);
+};
 
 /******************************
 DOM Stuff
 ******************************/
 
-
-/***** Start Page *****/
 let table = $('div.game_table');
-
 let startDeck = $('<div class="card stack back start_deck">');
 let startButton = $('<button class="start_button">');
 startButton.text(`Play!`);
@@ -105,73 +140,53 @@ let startGame = function() {
   $('.start_deck').remove();
   $('h1').text('Card Battle');
 
+  let pOne = $('<div class="pOne">');
+  let pTwo = $('<div class="pTwo">');
+  let status = $('<div class="status">');
 
-  let pOne = $('<div class="card stack back pOne ps">');
-  let pTwo = $('<div class="card stack back pTwo ps">');
-  let drawButton = $('<button class="draw_button">');
-  drawButton.text('Draw!');
   table.append(pOne);
+  pOne.append($('<div class="card back">'));
+  pOne.append($('<div class="info">'));
+  table.append(status);
   table.append(pTwo);
-  table.append(drawButton);
+  pTwo.append($('<div class="card back">'));
+  pTwo.append($('<div class="info">'));
 
-
+  setupDrawButton();
   makeCards(suits, names, values);
   deck.sort(shuffle);
   dealWar(deck);
 }
 
 
-let playGame = function() {
+let setupDrawButton = function() {
+  let buttonContainer = $('<div class="button_containter">')
+  let drawButton = $('<button class="draw_button">');
 
+  drawButton.text('Draw!');
+  table.append(buttonContainer);
+  buttonContainer.append(drawButton);
+
+  let warButton = $('<button class="war_button">');
+  warButton.text('Play  War')
+  buttonContainer.append(warButton);
+  warButton.hide();
+
+  $('.draw_button').click(function() {
+    play();
+  })
+
+  $('.war_button').click(function() {
+    declareWar();
+  })
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 let addEventListeners = function() {
-  // I realize only now that i couldve made this one button, but it's late and i want to go to bed
 
   $('.start_button').click(function() {
     startGame();
   })
-
-  $('.draw_button').click(function() {
-    playGame();
-    console.log(stack1[0], stack2[0], stack1.length, stack2.length)
-  })
-
-
-
-
-
 
 }
 addEventListeners();
