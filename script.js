@@ -1,4 +1,5 @@
-let suits = ['❤', '⬥', '♣', '♠'];
+/**** Create Cards *****/
+let suits = ['♥️', '♦️', '♣️', '♠️'];
 let names = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'Jack', 'Queen', 'King', 'Ace'];
 let values = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
 let deck = [];
@@ -15,13 +16,9 @@ let makeCards = function(suits, names, values) {
   })
 };
 
-
-// This function uses sort. found it here
-//stackoverflow.com/questions/3718282/javascript-shuffling-objects-inside-an-object-randomize
 let shuffle = function(a, b) {
   return Math.random() - .5;
 };
-
 
 var stack1 = [];
 var stack2 = [];
@@ -36,16 +33,13 @@ let dealWar = function(deck) {
   })
 };
 
-
 var warCards = [];
 let play = function() {
   let card1 = stack1.shift();
   let card2 = stack2.shift();
-
   $('.card').removeClass('back');
   $('.pOne .card').text(`${card1.suit} ${card1.name}`);
   $('.pTwo .card').text(`${card2.suit} ${card2.name}`);
-
   if (card1.value > card2.value) {
     stack1.push(card1, card2);
     $('.status').text(`Player 1 beats Player 2`);
@@ -58,14 +52,12 @@ let play = function() {
     warCards = [card1, card2];
     alertWar();
   }
-
   $('.pOne .info').text(`Player 1 - ${stack1.length} cards left`);
   $('.pTwo .info').text(`Player 2 - ${stack2.length} cards left`);
 };
 
-
 let alertWar = function(cards) {
-  alert('WAR !!!!');
+  alert('WAR !!');
   $('.pOne .card').text('');
   $('.pTwo .card').text('');
   $('.pOne .card').addClass('back');
@@ -73,7 +65,6 @@ let alertWar = function(cards) {
   $('.draw_button').hide();
   $('.war_button').show();
 }
-
 
 let  declareWar = function() {
   let warStack1 = stack1.splice(0, 4);
