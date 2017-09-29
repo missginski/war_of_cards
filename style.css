@@ -1,5 +1,5 @@
 body {
-  background: #B2DBBF;
+  background: #70945F;
   margin: 0;
   padding: 0;
 }
@@ -16,18 +16,20 @@ h1 span {
 
 .game_table {
   text-align: center;
-  color: white;
+  color: #F9F4ED;
 }
 
 button {
-  width: 10%;
+  width: 15%;
   font-size: 32px;
-  background: #aaa;
+  background: #F9F4ED;
   margin-bottom: 30px;
+  border: 1px #F9F4ED solid;
+  color: #3D444E
 }
 
 .card {
-  background: #fff;
+  background: #F9FAEB;
   height: 300px;
   line-height: 300px;
   width: 225px;

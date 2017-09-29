@@ -1,8 +1,8 @@
-/**** Create Cards *****/
-let suits = ['♥️', '♦️', '♣️', '♠️'];
+/**** CARDS ****/
+let deck = [];
+let suits = ['♥', '♦', '♣', '♠'];
 let names = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'Jack', 'Queen', 'King', 'Ace'];
 let values = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
-let deck = [];
 
 let makeCards = function(suits, names, values) {
   $.each(suits, function(i, cardSuit) {
@@ -33,6 +33,35 @@ let dealWar = function(deck) {
   })
 };
 
+/**** GAME START ****/
+let table = $('div.game_table');
+let startDeck = $('<div class="card stack back start_deck">');
+let startButton = $('<button class="start_button">');
+startButton.text(`Play`);
+table.append(startDeck);
+table.append(startButton);
+
+let startGame = function() {
+  $('.start_button').remove();
+  $('.start_deck').remove();
+  $('h1').text('Card Battle');
+  let pOne = $('<div class="pOne">');
+  let pTwo = $('<div class="pTwo">');
+  let status = $('<div class="status">');
+  table.append(pOne);
+  pOne.append($('<div class="card back">'));
+  pOne.append($('<div class="info">'));
+  table.append(status);
+  table.append(pTwo);
+  pTwo.append($('<div class="card back">'));
+  pTwo.append($('<div class="info">'));
+  setupDrawButton();
+  makeCards(suits, names, values);
+  deck.sort(shuffle);
+  dealWar(deck);
+}
+
+/**** GAME DYNAMICS ****/
 var warCards = [];
 let play = function() {
   let card1 = stack1.shift();
@@ -48,7 +77,7 @@ let play = function() {
     stack2.push(card1, card2);
     $('.status').text(`Player 2 beats Player 1`);
   }
-  else {
+    else {
     warCards = [card1, card2];
     alertWar();
   }
@@ -57,11 +86,12 @@ let play = function() {
 };
 
 let alertWar = function(cards) {
-  alert('WAR !!');
-  $('.pOne .card').text('');
-  $('.pTwo .card').text('');
-  $('.pOne .card').addClass('back');
-  $('.pTwo .card').addClass('back');
+  // alert('WAR !!');
+  $('h1').text('This means war')
+  // $('.pOne .card').text('');
+  // $('.pTwo .card').text('');
+  // $('.pOne .card').addClass('back');
+  // $('.pTwo .card').addClass('back');
   $('.draw_button').hide();
   $('.war_button').show();
 }
@@ -69,13 +99,11 @@ let alertWar = function(cards) {
 let  declareWar = function() {
   let warStack1 = stack1.splice(0, 4);
   let warStack2 = stack2.splice(0, 4);
-
   $('.card').removeClass('back');
   $('.pOne .card').text(`${warStack1[3].suit} ${warStack1[3].name}`);
   $('.pTwo .card').text(`${warStack2[3].suit} ${warStack2[3].name}`);
   $('.draw_button').show();
   $('.war_button').hide();
-
   if (warStack1[3].value > warStack2[3].value) {
     $.each(warStack2, function(i, card) {
        stack1.push(card);
@@ -109,73 +137,34 @@ let  declareWar = function() {
     });
     alertWar();
   }
-
   $('.pOne .info').text(`Player 1 - ${stack1.length} cards left`);
   $('.pTwo .info').text(`Player 2 - ${stack2.length} cards left`);
 };
 
-
-let table = $('div.game_table');
-let startDeck = $('<div class="card stack back start_deck">');
-let startButton = $('<button class="start_button">');
-startButton.text(`Play!`);
-table.append(startDeck);
-table.append(startButton);
-
-
-let startGame = function() {
-  $('.start_button').remove();
-  $('.start_deck').remove();
-  $('h1').text('Card Battle');
-
-  let pOne = $('<div class="pOne">');
-  let pTwo = $('<div class="pTwo">');
-  let status = $('<div class="status">');
-
-  table.append(pOne);
-  pOne.append($('<div class="card back">'));
-  pOne.append($('<div class="info">'));
-  table.append(status);
-  table.append(pTwo);
-  pTwo.append($('<div class="card back">'));
-  pTwo.append($('<div class="info">'));
-
-  setupDrawButton();
-  makeCards(suits, names, values);
-  deck.sort(shuffle);
-  dealWar(deck);
-}
-
-
+/**** BUTTONS & LISTENERS ****/
 let setupDrawButton = function() {
   let buttonContainer = $('<div class="button_containter">')
   let drawButton = $('<button class="draw_button">');
-
-  drawButton.text('Draw!');
+  drawButton.text('Draw');
   table.append(buttonContainer);
   buttonContainer.append(drawButton);
-
   let warButton = $('<button class="war_button">');
-  warButton.text('Play  War')
+  warButton.text('Play War')
   buttonContainer.append(warButton);
   warButton.hide();
-
   $('.draw_button').click(function() {
     play();
   })
-
   $('.war_button').click(function() {
     declareWar();
   })
 }
 
-
 let addEventListeners = function() {
-
   $('.start_button').click(function() {
     startGame();
   })
-
 }
+
 addEventListeners();
 
