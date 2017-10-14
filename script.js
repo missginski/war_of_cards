@@ -44,7 +44,7 @@ table.append(startButton);
 let startGame = function() {
   $('.start_button').remove();
   $('.start_deck').remove();
-  $('h1').text('Card Battle');
+  // $('h1').text('Card Battle');
   let pOne = $('<div class="pOne">');
   let pTwo = $('<div class="pTwo">');
   let status = $('<div class="status">');
